@@ -1,11 +1,10 @@
 import React, {Component} from "react";
 import axios from "axios";
-import { Grid, Col, Table } from "react-bootstrap";
+import { Grid, Col, Table, Button } from "react-bootstrap";
 import AddPerson from "../contents/AddPerson";
 import UpdatePerson from "../contents/UpdatePerson";
 import Card from "../components/Cards/Card";
 
-// import PersonInput from "../contents/PersonInput";
 
 class PersonList extends Component {
   constructor( props ) {
@@ -75,6 +74,7 @@ class PersonList extends Component {
               title="Persons"
               content={
                 <div>
+                <AddPerson onInsertPerson={(user) => this.addPerson(user)} />
                 <Table >
                   <thead>
                     <tr>
@@ -82,9 +82,6 @@ class PersonList extends Component {
                       <th>Name</th>
                       <th>Userame</th>
                       <th>Email</th>
-                      <th>
-                        <AddPerson onInsertPerson={(user) => this.addPerson(user)} />
-                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -95,8 +92,15 @@ class PersonList extends Component {
                           <td>{person.name}</td>
                           <td>{person.username}</td>
                           <td>{person.email}</td>
-                          <td><button onClick={this.deletePerson.bind(this, index)}>Delete</button></td>
-                          <td><UpdatePerson person={person} onUpdatePerson={(user) => this.updatePerson(index, user)} /></td>
+                          <td>
+                            <Button className="btn btn-danger btn-simple btn-xs">
+                              <span onClick={this.deletePerson.bind(this, index)} className="fa fa-times">
+                              </span>
+                            </Button>
+                          </td>
+                          <td>
+                            <UpdatePerson person={person} onUpdatePerson={(user) => this.updatePerson(index, user)} />
+                          </td>
                         </tr>
                       )
                     })}

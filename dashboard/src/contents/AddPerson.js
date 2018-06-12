@@ -38,7 +38,7 @@ class AddPerson extends Component {
   render(){
     return(
       <ButtonToolbar>
-        <Button bsStyle="info" className="btn-fill" onClick={this.handleShow}>
+        <Button bsStyle="info" className="btn-fill pull-right" onClick={this.handleShow}>
           Add
         </Button>
 

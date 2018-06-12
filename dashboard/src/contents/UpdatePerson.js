@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Modal, Button, ButtonToolbar, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 
-class AddPerson extends Component {
+class UpdatePerson extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -38,8 +38,8 @@ class AddPerson extends Component {
   render(){
     return(
       <ButtonToolbar>
-        <Button bsStyle="info" className="btn-fill" onClick={this.handleShow}>
-          Update
+        <Button className="btn btn-success btn-simple btn-xs">
+          <span onClick={this.handleShow} className="fa fa-edit"></span>
         </Button>
 
         <Modal
@@ -78,4 +78,4 @@ class AddPerson extends Component {
   }
 }
 
-export default AddPerson;
+export default UpdatePerson;
