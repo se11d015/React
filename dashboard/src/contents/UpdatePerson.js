@@ -49,7 +49,7 @@ class UpdatePerson extends Component {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              Add New Person
+              Update the Information
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -69,8 +69,8 @@ class UpdatePerson extends Component {
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button type="submit" bsStyle="info" className="btn-fill" onClick={this.handleSubmit}>Save</Button>
-            <Button bsStyle="info" className="btn-fill" onClick={this.handleHide}>Close</Button>
+            <Button type="submit" className="btn-fill" onClick={this.handleSubmit}>Save</Button>
+            <Button className="btn-fill" onClick={this.handleHide}>Close</Button>
           </Modal.Footer>
         </Modal>
       </ButtonToolbar>

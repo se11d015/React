@@ -3,6 +3,7 @@ import axios from "axios";
 import { Grid, Col, Table, Button } from "react-bootstrap";
 import AddPerson from "../contents/AddPerson";
 import UpdatePerson from "../contents/UpdatePerson";
+import PersonSearch from "../contents/PersonSearch";
 import Card from "../components/Cards/Card";
 
 
@@ -14,20 +15,21 @@ class PersonList extends Component {
     }
     this.addPerson = this.addPerson.bind(this);
     this.updatePerson = this.updatePerson.bind(this);
+    this.filteredPerson = this.filteredPerson.bind(this);
   }
 
   // componentDidMount () {
   //   this.fetchData();
   // }
-  //
+  
   // fetchData() {
   //   axios.get(`https://jsonplaceholder.typicode.com/users`).then(response => {
   //     this.setState({ persons: response.data });
   //   });
   // }
-  //
-  //
-  //
+  
+  
+  
   // deleteUser(id) {
   //   if(window.confirm("Are you sure?")){
   //   axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`).then(response => {
@@ -40,12 +42,13 @@ class PersonList extends Component {
   componentDidMount () {
     axios.get(`https://jsonplaceholder.typicode.com/users`).then(response => {
       this.setState({ persons: response.data });
+      console.log(response.data);
     });
   }
 
   deletePerson = (index, e) => {
     if (window.confirm("Are you sure")) {
-    var users = Object.assign([], this.state.persons);
+    var users = this.state.persons;
     users.splice(index, 1);
     this.setState({persons: users});
     }
@@ -57,24 +60,45 @@ class PersonList extends Component {
     this.setState({persons: users});
   }
 
-  updatePerson(index, user){
+  updatePerson(index, user) {
     var users = this.state.persons;
     users[index] = user
     this.setState({persons: users});
   }
+
+  filteredPerson(e) {
+    var filtered = this.state.persons;
+    filtered.filter((person) => {
+      return person.name.indexOf(e) !== -1;
+    });
+
+    this.setState({persons: filtered});
+  }
+
+  // filteredPerson(user) {
+  //   var filtered = this.state.persons.filter(
+  //     (person) => {
+  //       return person.name.indexOf(this.props.search) !== -1;
+  //     }
+  //     );
+  //   this.setState({persons: filtered});
+
+  // }
 
   render(){
     return(
       <div className="content">
         <Grid fluid>
           <Col md={12}>
-
             <Card
               header="Header"
               title="Persons"
               content={
                 <div>
+                <Col md={12}>
+                <PersonSearch onSearchPerson={(e) => this.filteredPerson(e)} />
                 <AddPerson onInsertPerson={(user) => this.addPerson(user)} />
+                </Col>
                 <Table >
                   <thead>
                     <tr>

@@ -7,7 +7,7 @@ class AddPerson extends Component {
 
     this.handleShow = this.handleShow.bind(this);
     this.handleHide = this.handleHide.bind(this);
-    this.handleChangeText = this.handleChangeText.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
@@ -26,7 +26,7 @@ class AddPerson extends Component {
     this.setState({ show: false });
   }
 
-  handleChangeText(event, name) {
+  handleChange(event, name) {
     this.setState({ [name]: event.target.value });
   }
 
@@ -38,7 +38,7 @@ class AddPerson extends Component {
   render(){
     return(
       <ButtonToolbar>
-        <Button bsStyle="info" className="btn-fill pull-right" onClick={this.handleShow}>
+        <Button className="btn-fill pull-right" onClick={this.handleShow}>
           Add
         </Button>
 
@@ -56,21 +56,21 @@ class AddPerson extends Component {
             <form>
               <FormGroup>
                 <ControlLabel>Name</ControlLabel>
-                <FormControl type="text" onChange={(e) => this.handleChangeText(e, "name")} placeholder="Name..." />
+                <FormControl type="text" onChange={(e) => this.handleChange(e, "name")} placeholder="Name..." />
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Username</ControlLabel>
-                <FormControl type="text" onChange={(e) => this.handleChangeText(e, "username")} placeholder="Username..." />
+                <FormControl type="text" onChange={(e) => this.handleChange(e, "username")} placeholder="Username..." />
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Email</ControlLabel>
-                <FormControl type="text" onChange={(e) => this.handleChangeText(e, "email")} placeholder="Email..." />
+                <FormControl type="text" onChange={(e) => this.handleChange(e, "email")} placeholder="Email..." />
               </FormGroup>
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button type="submit" bsStyle="info" className="btn-fill" onClick={this.handleSubmit}>Save</Button>
-            <Button bsStyle="info" className="btn-fill" onClick={this.handleHide}>Close</Button>
+            <Button type="submit" className="btn-fill" onClick={this.handleSubmit}>Save</Button>
+            <Button className="btn-fill" onClick={this.handleHide}>Close</Button>
           </Modal.Footer>
         </Modal>
       </ButtonToolbar>
