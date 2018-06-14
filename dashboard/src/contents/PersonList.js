@@ -21,15 +21,15 @@ class PersonList extends Component {
   // componentDidMount () {
   //   this.fetchData();
   // }
-  
+
   // fetchData() {
   //   axios.get(`https://jsonplaceholder.typicode.com/users`).then(response => {
   //     this.setState({ persons: response.data });
   //   });
   // }
-  
-  
-  
+
+
+
   // deleteUser(id) {
   //   if(window.confirm("Are you sure?")){
   //   axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`).then(response => {
@@ -66,24 +66,14 @@ class PersonList extends Component {
     this.setState({persons: users});
   }
 
-  filteredPerson(e) {
-    var filtered = this.state.persons;
-    filtered.filter((person) => {
-      return person.name.indexOf(e) !== -1;
-    });
-
+  filteredPerson(element) {
+    var filtered = this.state.persons.filter(
+      (person) => {
+        return person.name.indexOf(element.search) !== -1;
+      }
+      );
     this.setState({persons: filtered});
   }
-
-  // filteredPerson(user) {
-  //   var filtered = this.state.persons.filter(
-  //     (person) => {
-  //       return person.name.indexOf(this.props.search) !== -1;
-  //     }
-  //     );
-  //   this.setState({persons: filtered});
-
-  // }
 
   render(){
     return(
