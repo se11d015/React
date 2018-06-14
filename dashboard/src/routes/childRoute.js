@@ -10,16 +10,16 @@ const childRoute = [
 		component: Dashboard
 	},
 	{
-		path: "/student",
-		name: "Student List",
-		icon: "pe-7s-study",
-		component: StudentList
-	},
-	{
-		path: "/person",
-		name: "Person List",
+		path: "/tutor",
+		name: "Tutor",
 		icon: "pe-7s-users",
 		component: PersonList
+	},
+	{
+		path: "/student",
+		name: "Student",
+		icon: "pe-7s-study",
+		component: StudentList
 	},
 	{ redirect: true,
 		path: "/",

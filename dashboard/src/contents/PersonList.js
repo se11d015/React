@@ -12,10 +12,14 @@ class PersonList extends Component {
     super( props );
     this.state = {
       persons: [],
+      direction: {
+        name: "asc",
+      }
     }
     this.addPerson = this.addPerson.bind(this);
     this.updatePerson = this.updatePerson.bind(this);
     this.filteredPerson = this.filteredPerson.bind(this);
+    this.sortBy = this.sortBy.bind(this);
   }
 
   // componentDidMount () {
@@ -46,33 +50,44 @@ class PersonList extends Component {
     });
   }
 
-  deletePerson = (index, e) => {
+  deletePerson = (index, element) => {
     if (window.confirm("Are you sure")) {
-    var users = this.state.persons;
-    users.splice(index, 1);
-    this.setState({persons: users});
+    var person = this.state.persons;
+    person.splice(index, 1);
+    this.setState({persons: person});
     }
   }
 
-  addPerson(user) {
-    var users = this.state.persons;
-    users.push(user);
-    this.setState({persons: users});
+  addPerson(element) {
+    var person = this.state.persons;
+    person.push(element);
+    this.setState({persons: person});
   }
 
-  updatePerson(index, user) {
+  updatePerson(index, element) {
     var users = this.state.persons;
-    users[index] = user
+    users[index] = element
     this.setState({persons: users});
   }
 
   filteredPerson(element) {
     var filtered = this.state.persons.filter(
       (person) => {
-        return person.name.indexOf(element.search) !== -1;
+        return person.name.indexOf(element.search) !== -1 ||
+               person.username.indexOf(element.search) !== -1;
+
       }
       );
     this.setState({persons: filtered});
+    console.log(filtered);
+  }
+
+  sortBy(key) {
+    console.log(key);
+    var newArray = [].concat(this.state.persons).sort((a, b) => (
+      this.state.direction[key] === "asc" ? a[key] > b[key] : a[key] < b[key]
+    ));
+    this.setState({persons: newArray});
   }
 
   render(){
@@ -82,7 +97,7 @@ class PersonList extends Component {
           <Col md={12}>
             <Card
               header="Header"
-              title="Persons"
+              title="Tutors"
               content={
                 <div>
                 <Col md={12}>
@@ -93,9 +108,24 @@ class PersonList extends Component {
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Name</th>
-                      <th>Userame</th>
-                      <th>Email</th>
+                      <th>
+                        Name
+                        <button className="btn-simple btn-xs">
+                          <span className="caret" onClick={() => this.sortBy("name")}></span>
+                        </button>
+                      </th>
+                      <th>
+                        User Name
+                        <button className="btn-simple btn-xs">
+                          <span className="caret" onClick={() => this.sortBy("username")}></span>
+                        </button>
+                      </th>
+                      <th>
+                        Email
+                        <button className="btn-simple btn-xs">
+                          <span className="caret" onClick={() => this.sortBy("email")}></span>
+                        </button>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -108,7 +138,7 @@ class PersonList extends Component {
                           <td>{person.email}</td>
                           <td>
                             <Button className="btn btn-danger btn-simple btn-xs">
-                              <span onClick={this.deletePerson.bind(this, index)} className="fa fa-times">
+                              <span onClick={this.deletePerson} className="fa fa-times">
                               </span>
                             </Button>
                           </td>
